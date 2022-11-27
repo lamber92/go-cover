@@ -44,14 +44,21 @@ func (c *converter) convertProfile(packages packagesCache, p *cover.Profile) err
 	var stmts []statement
 	for _, fe := range extents {
 		f := &metadata.Function{
-			Name:  fe.name,
-			File:  file,
-			Start: fe.startOffset,
-			End:   fe.endOffset,
+			Name:      fe.name,
+			File:      file,
+			Start:     fe.startOffset,
+			End:       fe.endOffset,
+			StartLine: fe.startLine,
+			EndLine:   fe.endLine,
 		}
 		for _, se := range fe.stmts {
 			s := statement{
-				Statement:  &metadata.Statement{Start: se.startOffset, End: se.endOffset},
+				Statement: &metadata.Statement{
+					Start:     se.startOffset,
+					End:       se.endOffset,
+					StartLine: se.startLine,
+					EndLine:   se.endLine,
+				},
 				StmtExtent: se,
 			}
 			f.Statements = append(f.Statements, s.Statement)

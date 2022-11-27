@@ -5,19 +5,28 @@ import "fmt"
 type Function struct {
 	// Name 是函数的名称。
 	// 如果函数有接收器，名称将采用 T.N 形式，其中 T 是类型，N 是名称。
-	Name string
+	Name string `json:"Name,omitempty"`
 
 	// File 是定义函数的文件的完整路径。
-	File string
+	File string `json:"File,omitempty"`
 
 	// Start 是函数签名的起始偏移量。
-	Start int
+	Start int `json:"Start,omitempty"`
 
 	// End 是函数的结束偏移量。
-	End int
+	End int `json:"End,omitempty"`
+
+	// StartLine 是函数的起始行号
+	StartLine int `json:"StartLine,omitempty"`
+
+	// EndLine 是函数的结束行号
+	EndLine int `json:"EndLine,omitempty"`
 
 	// Statements 是指使用此函数注册的语句。
-	Statements []*Statement
+	Statements []*Statement `json:"Statements,omitempty"`
+
+	// NewLineSet 新代码行号集合。用于增量覆盖率。
+	NewLineSet map[int]struct{} `json:"NewLineSet,omitempty"`
 }
 
 // Accumulate 会将提供的 Function 的覆盖率信息累积到此 Function 中。

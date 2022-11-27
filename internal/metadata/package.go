@@ -4,10 +4,10 @@ import "fmt"
 
 type Package struct {
 	// 名称是包的规范路径。
-	Name string
+	Name string `json:"Name,omitempty"`
 
 	// Functions 是使用此包注册的函数列表。
-	Functions []*Function
+	Functions []*Function `json:"Functions,omitempty"`
 }
 
 // Accumulate 会将提供的 Package 中的覆盖率信息累积到此 Package 中。

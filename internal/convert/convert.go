@@ -2,7 +2,6 @@ package convert
 
 import (
 	"go/build"
-	"os"
 
 	"github.com/lamber92/go-cover/internal/metadata"
 	"github.com/lamber92/go-cover/internal/utils"
@@ -11,31 +10,22 @@ import (
 
 type packagesCache map[string]*build.Package
 
-func Convert(filename string) error {
-	var (
-		ps       utils.Packages
-		packages = make(packagesCache)
-	)
-
-	converter := converter{
-		packages: make(map[string]*metadata.Package),
-	}
+func Do(filename string) (ps utils.Packages, err error) {
 	profiles, err := cover.ParseProfiles(filename)
 	if err != nil {
-		return err
+		return
 	}
+	var (
+		packages = make(packagesCache)
+		conv     = converter{packages: make(map[string]*metadata.Package)}
+	)
 	for _, p := range profiles {
-		if err := converter.convertProfile(packages, p); err != nil {
-			return err
+		if err = conv.convertProfile(packages, p); err != nil {
+			return
 		}
 	}
-
-	for _, pkg := range converter.packages {
+	for _, pkg := range conv.packages {
 		ps.AppendPackage(pkg)
 	}
-
-	if err := utils.MarshalJson(os.Stdout, ps); err != nil {
-		return err
-	}
-	return nil
+	return
 }
