@@ -1,6 +1,6 @@
 # go-cover
 
-**简体中文** **|** [**English**](https://github.com/lamber92/go-cover/README_en.md)
+**简体中文** **|** [**English**](https://github.com/lamber92/go-cover/blob/main/README_en.md)
 
 通过转换Go-Coverage-Profile，生成全量/增量覆盖率报告(HTML文件)的工具。
 

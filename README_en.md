@@ -1,6 +1,6 @@
 # go-cover
 
-[**简体中文**](https://github.com/lamber92/go-cover/README.md) **|** **English**
+[**简体中文**](https://github.com/lamber92/go-cover) **|** **English**
 
 A tool for generating full/differential coverage reports (HTML files) by converting Go-Coverage-Profile.
 
