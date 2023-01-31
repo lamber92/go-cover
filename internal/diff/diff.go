@@ -191,7 +191,8 @@ func (d *diff) listCommitModifyFiles() error {
 
 func (d *diff) listCommitModifyLineNos() error {
 	for path, lineNos := range d.filePathM2LineNos {
-		cmd := exec.Command("git", "blame", path, "-s", "--show-name")
+		// https://git-scm.com/docs/git-blame
+		cmd := exec.Command("git", "blame", path, "-w", "-s", "--show-name")
 		output, err := cmd.CombinedOutput()
 		if err != nil {
 			return fmt.Errorf("failed to get modify codes information from file[%s]. err: %v", path, err)
